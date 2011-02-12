@@ -1,0 +1,174 @@
+#!/usr/bin/env python
+
+import os, os.path, sys, shutil, re, glob, zipfile
+
+chromeSubDir     = 'chrome'
+componentSubDir  = 'components'
+preferenceSubDir = os.path.join(componentSubDir, 'preferences')
+defaultSubDir    = 'defaults'
+
+createSubDirs = [chromeSubDir, componentSubDir, preferenceSubDir, defaultSubDir]
+
+chromeSubDirs = ['content', 'locale', 'skin']
+#chromeJarSubDirs = ['content']
+chromeJarSubDirs = []
+
+chromeCopySubDirs = [subDir for subDir in chromeSubDirs if subDir not in chromeJarSubDirs]
+
+patSkip = [
+        '/[.]',
+        '^[.]',
+        '^[^/]*[.]html$',
+        '^[^/]*[.]css$',
+        '^[^/]*[.]png$',
+        '^bin/',
+        '^blurb$',
+        '^install[.]rdf$',
+        '^update[.]rdf$',
+        '^chrome[.]manifest$',
+        '[.]xpi$']
+reSkip = []
+for pat in patSkip:
+    reSkip.append(re.compile(pat))
+
+reVersion = re.compile('em:version.*"([^"]+)"')
+reUpdate  = re.compile('^([ \t]*).*em:update.*"[^"]+"[ \t]*(.*)$')
+
+def abort(msg):
+    sys.stderr('ERROR: %s\n', msg)
+    sys.exit(1)
+
+def isSkipped(path, reSkip):
+    for reChk in reSkip:
+        if reChk.search(path):
+            print 'Skip "%s"' % path
+            return True
+    return False
+
+# Recursive directory copy with filtering
+def copydir(dir, buildDir, descend, reSkip):
+    if not os.path.isdir(dir):
+        return
+    if descend:
+        for i in glob.glob(os.path.join(dir, '*')):
+            if not isSkipped(i, reSkip) and os.path.isdir(i):
+                os.mkdir(os.path.join(buildDir, i))
+                copydir(i, buildDir, descend, reSkip)
+    for i in glob.glob(os.path.join(dir, '*')):
+        if not isSkipped(i, reSkip) and os.path.isfile(i):
+            tgt = os.path.join(buildDir, i)
+            print '%s > %s' % (i, tgt)
+            shutil.copyfile(i, tgt)
+
+def zipdir(zip, dir, reSkip):
+    for i in glob.glob(os.path.join(dir, '*')):
+        if not isSkipped(i, reSkip) and os.path.isdir(i):
+            zipdir(zip, i, reSkip)
+    for i in glob.glob(os.path.join(dir, '*')):
+        if not isSkipped(i, reSkip) and os.path.isfile(i):
+            print 'ZIP %s' % i
+            zip.write(i)
+
+def copyChromeManifest(src, tgt, name):
+    version = None
+    fOut = open(tgt, 'w')
+    jarPreamble = 'jar:chrome/%s.jar!/' % name
+    dirPreamble = 'chrome/'
+    for s in open(src):
+        words = s.split()
+        if len(words) > 1 and words[0] in chromeSubDirs:
+            if words[0] in chromeJarSubDirs:
+                fOut.write('%s %s%s\n' % (' '.join(words[:-1]), jarPreamble, words[-1]))
+            else:
+                fOut.write('%s %s%s\n' % (' '.join(words[:-1]), dirPreamble, words[-1]))
+        else:
+            fOut.write(s)
+    fOut.close()
+    print '%s > %s' % (src, tgt)
+
+def copyInstallRDF(src, tgt, mozilla):
+    version = None
+    fOut = open(tgt, 'w')
+    for s in open(src):
+        line = s.rstrip()
+        m = reVersion.search(line)
+        if m is not None:
+            version = m.group(1)
+        sOut = s
+        if mozilla:
+            m = reUpdate.search(line)
+            if m is not None:
+                sOut = '%s%s\n' % (m.group(1), m.group(2))
+        if sOut:
+            fOut.write(sOut)
+    fOut.close()
+    print '%s > %s' % (src, tgt)
+    assert(version is not None)
+    return version
+
+def build(buildDir, mozilla):
+
+    if mozilla:
+        print '\n::: Building for mozilla-hosted...\n'
+    else:
+        print '\n::: Building for self-hosted...\n'
+
+    # Clean out old
+    if os.path.isdir(buildDir):
+        shutil.rmtree(buildDir)
+
+    # Create skeleton for new
+    os.mkdir(buildDir)
+    for subDir in createSubDirs:
+        os.mkdir(os.path.join(buildDir, subDir))
+    for subDir in chromeCopySubDirs:
+        if os.path.isdir(subDir):
+            os.mkdir(os.path.join(buildDir, chromeSubDir, subDir))
+
+    # Copy install.rdf, filter as needed, and grab version
+    version = copyInstallRDF('install.rdf', os.path.join(buildDir, 'install.rdf'), mozilla)
+
+    # Determine paths for compressed files
+    name = os.path.split(os.getcwd())[1]
+    chromeJarPath = os.path.join(buildDir, chromeSubDir, '%s.jar' % name)
+    if mozilla:
+        xpiPath = '%s-%s-mozilla.xpi' % (name, version)
+    else:
+        xpiPath = '%s-%s.xpi' % (name, version)
+
+    # Copy and tweak chrome.manifest
+    copyChromeManifest('chrome.manifest', os.path.join(buildDir, 'chrome.manifest'), name)
+
+    # Copy the root directory
+    copydir('', buildDir, False, reSkip)
+
+    # Create the chrome jar
+    if chromeJarSubDirs:
+        print 'Zipping %s from %s...' % (chromeJarPath, chromeJarSubDirs)
+        jar = zipfile.ZipFile(chromeJarPath, 'w', zipfile.ZIP_DEFLATED)
+        for subDir in chromeJarSubDirs:
+            zipdir(jar, subDir, reSkip)
+        jar.close()
+
+    # Copy the other directories
+    for dir in chromeCopySubDirs:
+        copydir(dir, os.path.join(buildDir, chromeSubDir), True, reSkip)
+
+    # Create the XPI
+    print 'Zipping %s from %s...' % (xpiPath, buildDir)
+    xpi = zipfile.ZipFile(xpiPath, 'w', zipfile.ZIP_DEFLATED)
+    saveDir = os.getcwd()
+    os.chdir(buildDir)
+    zipdir(xpi, '', [])
+    os.chdir(saveDir)
+    xpi.close()
+
+    print '''
+Version: %s
+ Chrome: %s
+    XPI: %s
+''' % (version, chromeJarPath, xpiPath)
+
+if __name__ == '__main__':
+    build('.build'        , False)
+    build('.build-mozilla', True)

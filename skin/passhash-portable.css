@@ -1,0 +1,95 @@
+body {
+    background-color: #eeffee;
+    font-family: arial;
+}
+
+ul {
+    margin-left: 10px;
+    padding-left: 0px;
+    margin-top:0em;
+}
+
+li {
+    font-size: 10pt;
+    font-family: arial;
+    padding-top: .25em;
+    margin-top:0em;
+}
+
+.formfield {
+    font-size: 10pt;
+    font-family: serif;
+    width: 160px;
+}
+
+.formtable {
+    border: thin green solid;
+    padding: .3em;
+}
+
+.title {
+    font-size: 10pt;
+    font-family: arial;
+    font-weight: bold;
+    color: #6060a0;
+    text-align: center;
+}
+
+.result {
+    font-family: serif;
+    background-color: #d0d0f0;
+}
+
+.formlabel {
+    font-size: 9pt;
+    font-family: arial;
+    font-weight: bold;
+    color: #607888;
+    text-align: left;
+    width: 78px;
+}
+
+.optionbox {
+    border: thin silver solid;
+}
+
+.optionlabel {
+    font-size: 9pt;
+    font-family: arial;
+    font-weight: bold;
+    color: #607888;
+    text-align: left;
+}
+
+.optiontable {
+}
+
+.option {
+    font-size: 10pt;
+    font-family: arial;
+}
+
+.noteshead {
+    font-size: 10pt;
+    font-family: arial;
+    font-weight: bold;
+    padding-top: .5em;
+    color: #336633;
+}
+
+.prompt {
+    font-size: 10pt;
+    font-family: arial;
+    font-weight: normal;
+    color: #222288;
+    height: 40px;
+}
+
+.button {
+    width: 70px;
+}
+
+.password {
+    font-size: 10pt;
+    width: 160px;
+}

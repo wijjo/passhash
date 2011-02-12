@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+
+<title>${passhashPortableTitle}</title>
+<meta http-equiv="content-type" content="text-html; charset=utf-8">
+
+<style>
+<!--!skin:passhash-portable.css-->
+</style>
+
+<script language="JavaScript" type="text/javascript">
+<!--!content:passhash-portable.js-->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--!content:passhash-sha1.js-->
+</script>
+
+<script language="JavaScript" type="text/javascript">
+<!--!content:passhash-common.js-->
+</script>
+
+</head>
+
+<body onload="onLoad();">
+
+    <form name="form" onsubmit="return validate(this)" action="javascript:update()">
+        <table class="formtable">
+            <tbody>
+                <tr>
+                    <td class="title" colspan="2">${passhashPortableTitle}</td>
+                </tr>
+                <tr>
+                    <td class="formlabel" colspan="2">${passhashPortableSiteTagLabel}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <select id="site-tag-list" class="formfield"
+                        onFocus="onEnterField(this, '${passhashPortableSiteTagListPrompt}');"
+                        onBlur="onLeaveSelectSiteTag(this);"
+                        onChange="onSelectSiteTag(this);"
+                        >
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="site-tag" class="formfield"
+                        onFocus="onEnterField(this, '${passhashPortableSiteTagPrompt}');"
+                        onBlur="onLeaveField(this);"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formlabel" colspan="2">${passhashPortableMasterKeyLabel}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="master-key" type="password" class="password" phNoMarkers
+                        onFocus="onEnterField(this, '${passhashPortableMasterKeyPrompt}');"
+                        onBlur="onLeaveField(this);"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formlabel" colspan="2">${passhashPortableHashWordLabel}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="hash-word" readonly="true" class="formfield result"
+                        onFocus="onEnterField(this, '${passhashPortableHashWordPrompt}');"
+                        onBlur="onLeaveResultField(this);"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="submit" type="submit" value="${passhashPortableAcceptLabel}"
+                        class="button"
+                        onFocus="onEnterSubmitButton(this);"
+                        onBlur="onLeaveField(this);"
+                        />
+                    </td>
+                    <td>
+                        <input id="bump" type="button" value="${passhashPortableBumpLabel}"
+                        class="button"
+                        onClick="onBump(this);"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="reveal" type="checkbox" class="option"
+                        onClick="onReveal(this);"
+                        />
+                        <span id="reveal-text" class="option">
+                            ${passhashPortableUnmaskLabel}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table class="optiontable">
+                            <tr>
+                                <td>
+                                    <div class="optionlabel">
+                                        ${passhashPortableRequirementsLabel}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="digit" type="checkbox" class="option"
+                                    checked
+                                    onClick="update();"
+                                    />
+                                    <span class="option">
+                                        ${passhashPortableDigitLabel}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="punctuation" type="checkbox" class="option"
+                                    checked
+                                    onClick="update();"
+                                    />
+                                    <span class="option">
+                                        ${passhashPortablePunctuationLabel}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="mixedCase" type="checkbox" class="option"
+                                    checked
+                                    onClick="update();"
+                                    />
+                                    <span class="option">
+                                        ${passhashPortableMixedCaseLabel}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table class="optiontable">
+                            <tr>
+                                <td>
+                                    <div class="optionlabel">
+                                        ${passhashPortableRestrictionsLabel}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="noSpecial" type="checkbox" class="option"
+                                    onClick="onNoSpecial(this);"
+                                    />
+                                    <span class="option">
+                                        ${passhashPortableNoSpecialLabel}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="digitsOnly" type="checkbox" class="option"
+                                    onClick="onDigitsOnly(this);"
+                                    />
+                                    <span class="option">
+                                        ${passhashPortableDigitsOnlyLabel}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table class="optiontable">
+                            <tr>
+                                <td>
+                                    <div class="optionlabel">
+                                        ${passhashPortableHashWordSizeLabel}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="s4" name="size" type="radio" value="4"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">4</span>
+                                </td>
+                                <td>
+                                    <input id="s16" name="size" type="radio" value="16"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">16</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="s6" name="size" type="radio" value="6"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">6</span>
+                                </td>
+                                <td>
+                                    <input id="s18" name="size" type="radio" value="18"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">18</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="s8" name="size" type="radio" value="8"
+                                    class="option" checked
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">8</span>
+                                </td>
+                                <td>
+                                    <input id="s20" name="size" type="radio" value="20"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">20</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="s10" name="size" type="radio" value="10"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">10</span>
+                                </td>
+                                <td>
+                                    <input id="s22" name="size" type="radio" value="22"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">22</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="s12" name="size" type="radio" value="12"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">12</span>
+                                </td>
+                                <td>
+                                    <input id="s24" name="size" type="radio" value="24"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">24</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="s14" name="size" type="radio" value="14"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">14</span>
+                                </td>
+                                <td>
+                                    <input id="s26" name="size" type="radio" value="26"
+                                    class="option"
+                                    onClick="update(this);"
+                                    />
+                                    <span class="option">26</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="prompt" class="prompt">
+        </div>
+        <div id="blurb" class="blurb">
+<!--!locale:portable-blurb.html-->
+        </div>
+    </form>
+</body>
+
+</html>

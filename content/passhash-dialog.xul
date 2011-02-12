@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css"  type="text/css"?>
+<?xml-stylesheet href="chrome://passhash/skin/passhash-dialog.css"  type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://passhash/locale/passhash.dtd">
+
+<dialog
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+    buttons="accept,cancel,disclosure"
+    title="&pshDlg.title.label;"
+    onload="PassHash.onLoad();"
+    ondialogaccept="return PassHash.onAccept();"
+    ondialogdisclosure="PassHash.onDisclosure();"
+    buttonlabelaccept="&pshDlg.accept.label;"
+    buttonlabelcancel="&pshDlg.cancel.label;"
+    buttonlabeldisclosure="&pshDlg.disclosure.label;"
+    buttonaccesskeyaccept="&pshDlg.accept.accesskey;"
+    buttonaccesskeycancel="&pshDlg.cancel.accesskey;"
+    buttonaccesskeydisclosure="&pshDlg.disclosure.accesskey;"
+    >
+
+    <stringbundle
+        id="passhash_strings"
+        src="chrome://passhash/locale/passhash.properties"
+        />
+
+    <script
+        src="passhash-sha1.js"
+        />
+
+    <script
+        src="passhash-common.js"
+        />
+
+    <script
+        src="passhash-dialog.js"
+        />
+
+    <vbox>
+
+        <hbox>
+
+            <grid>
+
+                <columns>
+                    <column/>
+                    <column/>
+                    <column/>
+                </columns>
+
+                <rows>
+
+                    <row
+                        class="formrow"
+                        >
+
+                        <label
+                            class="formlabel"
+                            flex="1"
+                            control="site-tag"
+                            accesskey="&pshDlg.site-tag.accesskey;"
+                            >
+                            &pshDlg.site-tag.label;
+                        </label>
+
+                        <textbox
+                            id="site-tag"
+                            class="formfield"
+                            type="password"
+                            oninput="PassHash.updateHashWord();"
+                            onblur="PassHash.onBlurSiteTag();"
+                            />
+
+                        <button
+                            id="site-tag-bump"
+                            label="&pshDlg.bump.label;"
+                            class="fieldbutton"
+                            oncommand="PassHash.onBumpSiteTag();"
+                            accesskey="&pshDlg.bump.accesskey;"
+                            tabindex="100"
+                            />
+
+                    </row>
+
+                    <row
+                        class="formrow"
+                        >
+
+                        <label
+                            class="formlabel"
+                            flex="1"
+                            control="master-key"
+                            accesskey="&pshDlg.master-key.accesskey;"
+                            >
+                            &pshDlg.master-key.label;
+                        </label>
+
+                        <textbox
+                            id="master-key"
+                            class="formfield"
+                            type="password"
+                            oninput="PassHash.updateHashWord();"
+                            />
+
+                        <checkbox
+                            id="unmask"
+                            class="formcheck"
+                            label="&pshDlg.unmask.label;"
+                            checked="false"
+                            oncommand="PassHash.onUnmask();"
+                            accesskey="&pshDlg.unmask.accesskey;"
+                            tabindex="101"
+                            />
+
+                    </row>
+
+                    <row
+                        class="formrow"
+                        >
+
+                        <label
+                            class="formlabel"
+                            flex="1"
+                            control="hash-word"
+                            accesskey="&pshDlg.hash-word.accesskey;"
+                            >
+                            &pshDlg.hash-word.label;
+                        </label>
+
+                        <textbox
+                            id="hash-word"
+                            class="formfield"
+                            type="password"
+                            readonly="true"
+                            />
+
+                        <button
+                            id="options"
+                            label="&pshDlg.options.label;"
+                            class="fieldbutton"
+                            oncommand="PassHash.onOptions();"
+                            accesskey="&pshDlg.options.accesskey;"
+                            tabindex="102"
+                            />
+
+                    </row>
+
+                </rows>
+
+            </grid>
+
+        </hbox>
+
+        <hbox
+            id="options-box"
+            >
+
+            <vbox>
+
+                <groupbox
+                    id="requirementsGroup"
+                    >
+
+                    <caption
+                        label="&pshDlg.requirements.label;"
+                        />
+
+                    <vbox>
+
+                        <checkbox
+                            id="digit"
+                            label="&pshDlg.digit.label;"
+                            accesskey="&pshDlg.digit.accesskey;"
+                            flex="1"
+                            oncommand="PassHash.onRequireDigitChanged();"
+                            checked="false"
+                            />
+
+                        <checkbox
+                            id="punctuation"
+                            label="&pshDlg.punctuation.label;"
+                            accesskey="&pshDlg.punctuation.accesskey;"
+                            flex="1"
+                            oncommand="PassHash.onRequirePunctuationChanged();"
+                            checked="false"
+                            />
+
+                        <checkbox
+                            id="mixedCase"
+                            label="&pshDlg.mixedCase.label;"
+                            accesskey="&pshDlg.mixedCase.accesskey;"
+                            flex="1"
+                            oncommand="PassHash.onRequireMixedCaseChanged();"
+                            checked="false"
+                            />
+
+                    </vbox>
+
+                </groupbox>
+
+                <groupbox
+                    id="restrictionsGroup"
+                    >
+
+                    <caption
+                        label="&pshDlg.restrictions.label;"
+                        />
+
+                    <vbox>
+
+                        <checkbox
+                            id="noSpecial"
+                            label="&pshDlg.noSpecial.label;"
+                            accesskey="&pshDlg.noSpecial.accesskey;"
+                            flex="1"
+                            oncommand="PassHash.onRestrictSpecialChanged();"
+                            checked="false"
+                            />
+
+                        <checkbox
+                            id="digitsOnly"
+                            label="&pshDlg.digitsOnly.label;"
+                            accesskey="&pshDlg.digitsOnly.accesskey;"
+                            flex="1"
+                            oncommand="PassHash.onRestrictDigitsChanged();"
+                            checked="false"
+                            />
+
+                    </vbox>
+
+                </groupbox>
+
+            </vbox>
+
+            <groupbox
+                id="hashWordSizeGroup"
+                >
+
+                <caption
+                    label="&pshDlg.hashWordSize.label;"
+                    />
+
+                <radiogroup
+                    id="hashWordSize"
+                    >
+
+                    <hbox>
+
+                        <vbox>
+
+                            <radio
+                                id="hashWordSize4"
+                                label="4"
+                                accesskey="4"
+                                value="4"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize6"
+                                label="6"
+                                accesskey="6"
+                                value="6"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize8"
+                                label="8"
+                                accesskey="8"
+                                value="8"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="true"
+                                />
+
+                            <radio
+                                id="hashWordSize10"
+                                label="10"
+                                accesskey="0"
+                                value="10"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize12"
+                                label="12"
+                                accesskey="2"
+                                value="12"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize14"
+                                label="14"
+                                value="14"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                        </vbox>
+
+                        <vbox>
+
+                            <radio
+                                id="hashWordSize16"
+                                label="16"
+                                value="16"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize18"
+                                label="18"
+                                value="18"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize20"
+                                label="20"
+                                value="20"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize22"
+                                label="22"
+                                value="22"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize24"
+                                label="24"
+                                value="24"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                            <radio
+                                id="hashWordSize26"
+                                label="26"
+                                value="26"
+                                oncommand="PassHash.onHashWordSizeChanged();"
+                                selected="false"
+                                />
+
+                        </vbox>
+
+                    </hbox>
+
+                </radiogroup>
+
+            </groupbox>
+
+        </hbox>
+
+        <spacer
+            flex="1"
+            height="8"
+            />
+
+        <iframe
+            id="notes"
+            src="chrome://passhash/locale/dialog.html"
+            minwidth="480"
+            minheight="360"
+            flex="1"
+            />
+
+    </vbox>
+
+</dialog>

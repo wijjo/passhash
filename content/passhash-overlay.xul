@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://passhash/locale/passhash.dtd">
+
+<overlay id="passhashOverlay"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script src="passhash-common.js"/>
+    <script src="passhash-overlay.js"/>
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="passhash_strings"
+            src="chrome://passhash/locale/passhash.properties"/>
+    </stringbundleset>
+
+    <commandset id="mainCommandSet">
+        <command id="Tasks:PassHash"
+            oncommand="PassHash.onInvokeDialog(event);"/>
+    </commandset>
+
+    <keyset id="mainKeyset">
+        <key id="key_passhash"
+            keycode="&passhashMenu.keycode;"
+            modifiers="&passhashMenu.keymodifiers;"
+            command="Tasks:PassHash"/>
+    </keyset>
+
+    <menupopup id="menu_ToolsPopup">
+        <menuitem id="menu_passhash"
+            label="&passhashMenu.label;"
+            key="key_passhash"
+            accesskey="&passhashMenu.accesskey;"
+            command="Tasks:PassHash"/>
+    </menupopup>
+
+    <popup id="contentAreaContextMenu">
+        <menuitem id="contextmenu_passhash"
+            label="&passhashMenu.label;"
+            key="key_passhash"
+            accesskey="&passhashMenu.accesskey;"
+            command="Tasks:PassHash"
+            insertafter="context-paste"/>
+    </popup>
+</overlay> 

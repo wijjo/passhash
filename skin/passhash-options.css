@@ -1,0 +1,17 @@
+.prompt1 {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 32px;
+    background-color: #bbbbbb;
+}
+
+.prompt2 {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 32px;
+    background-color: #bbbbbb;
+}
+
+.sizebox radio {
+    min-width: 40px;
+}

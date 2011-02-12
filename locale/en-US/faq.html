@@ -1,0 +1,135 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="../../skin/help.css">
+
+</head>
+
+<body>
+
+    <div class="navigation">
+    <a class="navlink" href="about.html">About</a>
+    <a class="navlink" href="tutorial.html">Tutorial</a>
+    <a class="navlink" href="options.html">Options</a>
+    <a class="navlink" href="dialog.html">Dialog</a>
+    <a class="navlink" href="portable.html">Portable</a>
+    <span class="navsel">FAQ</span>
+    <a class="navlink" href="changes.html">Changes</a>
+    <a class="navlink" href="http://wijjo.com/passhash/" target="_content">Home</a>
+    </div>
+
+    <h1>Frequently-Asked Questions:</h1>
+
+    <h2>Am I really improving my security or just saving effort?</h2>
+    <p>
+    It depends.  It should improve the security of most users by easing the
+    burden of using strong and varied passwords.  On the other hand, if you are
+    highly disciplined and aware of security needs you may actually increase
+    your vulnerability by exposing more sites to intrusion if a master key is
+    stolen.  Of course the hacker will only be successful if he knows to use
+    this tool to regenerate hash words.  If you're reusing passwords already
+    this tool should only help.
+    </p>
+
+    <h2>What if I need to log in and this tool isn't available?</h2>
+    <p>
+    You can generate a Portable Page to load and run in any browser when this
+    extension is unavailable.  You can also use the
+    <a href="http://wijjo.com/passhash/passhash.html" target="_content">
+    online tool</a> to generate identical hash words, but it won't know your
+    site tags and settings.  See the <a href="portable.html">Portable</a> help
+    page for more information.
+    </p>
+    <p>
+    The page fits nicely in a Firefox sidebar for extra convenience.  It is
+    also completely self-contained, so you can move the one HTML file to other
+    storage devices, including USB keys.  page as a single self-contained file
+    and store it on a USB key.
+    </p>
+    <p>
+    Please be aware that the extra hash word filtering and size options make
+    this tool incompatible with other similar tools, e.g.
+    <a href=http://hashapass.com/ target="_content">Hashapass</a>, which may
+    generate different results, depending on which options your are using.
+    </p>
+
+    <h2>Should I record the generated hash words somewhere?</h2>
+    <p>
+    It's not a bad idea, but if you save a Portable Page as backup you have
+    everything but the master key(s).  So it's up to you.  An additional
+    locked-up "dead tree" or electronic copy is an extra measure of safety, in
+    case you need to manually enter the hash words someday.  You can also use a
+    program like <a href="http://keepass.sourceforge.net" target="_content">
+    KeePass</a> (highly recommended for Windows users) to save your data in an
+    encrypted file.
+    </p>
+    <p>
+    Just give a bit of thought to all the scenarios of dying or borrowed
+    computers and broken software. :)
+    </p>
+
+    <h2>Do I have to remember the options set for each site?</h2>
+    <p>
+    Not normally.  The tool remembers it for you.  But if you lose the saved
+    data, e.g. by clearing the Firefox password cache, you need to reproduce
+    the default settings and the overrides for individual sites.  Hopefully you
+    won't have so many special cases that remembering is a problem.
+    </p>
+
+    <h2>Where is the data stored?</h2>
+    <p>
+    Everything is stored in the Firefox password cache.  It's encrypted and
+    secure.  You can use extensions like the
+    <a href="http://addons.mozilla.org/firefox/2848" target="_content">
+    Password Exporter</a> to save this cached data for backup or to transfer
+    it to another machine.
+    </p>
+
+    <h2>How can I change the shortcut key?</h2>
+    <h3>Procedure</h3>
+    <ul>
+        <li>Go to <strong>about:config</strong> using location bar.</li>
+        <li>Filter on passhash and look for
+        <strong>passhash.optShortcutKeyCode</strong> and
+        <strong>passhash.optShortcutKeyMods</strong>.</li>
+        <li>Set <strong>passhash.optShortcutKeyCode</strong> either to one of
+        the virtual keys using <strong>VK_</strong> as a prefix, e.g.
+        <strong>VK_F6</strong> or to a displayable key using the actual
+        character, e.g. <strong>h</strong> or <strong>;</strong>.</li>
+        <li>Set <strong>passhash.optShortcutKeyMods</strong> to one or more
+        space-separated key modifiers. <strong>accel</strong> is a
+        cross-platform modifier which is the Control key on PCs and the Command
+        key on Macs. You can also use <strong>alt</strong>,
+        <strong>control</strong>, <strong>shift</strong>, and
+        combinations.</li>
+        <li>Restart Firefox.</li>
+    </ul>
+    <h3>Examples</h3>
+    <h4>Control-Alt-H</h4>
+    <ul>
+        <li><strong>passhash.optShortcutKeyCode</strong> = <strong>h</strong></li>
+        <li><strong>passhash.optShortcutKeyMods</strong> = <strong>control alt</strong></li>
+    </ul>
+    <h4>Control-; (PC) and Command-; (Mac)</h4>
+    <ul>
+        <li><strong>passhash.optShortcutKeyCode</strong> = <strong>;</strong></li>
+        <li><strong>passhash.optShortcutKeyMods</strong> = <strong>accel</strong></li>
+    </ul>
+    <h4>Control-F12 (PC) and Command-F12 (Mac)</h4>
+    <ul>
+        <li><strong>passhash.optShortcutKeyCode</strong> = <strong>VK_F12</strong></li>
+        <li><strong>passhash.optShortcutKeyMods</strong> = <strong>accel</strong></li>
+    </ul>
+
+    <h2>How do I get help, report a problem or make a suggestion?</h2>
+    <p>
+    Feel free to contact the developer through
+    <a href="mailto:steve@wijjo.com">email</a>.  Obviously this is not a large
+    organization, but I get back to you as quickly as possible and appreciate
+    feedback. :)
+    </p>
+
+</body>
+
+</html>

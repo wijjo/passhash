@@ -1,0 +1,10 @@
+content passhash content/
+content passhash content/ contentaccessible=yes 
+overlay chrome://browser/content/browser.xul chrome://passhash/content/passhash-overlay.xul
+
+locale passhash en-US locale/en-US/
+locale passhash de-DE locale/de-DE/
+locale passhash it-IT locale/it-IT/
+
+skin passhash classic/1.0 skin/
+style chrome://global/content/customizeToolbar.xul chrome://passhash/skin/passhash-overlay.css

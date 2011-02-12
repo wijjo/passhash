@@ -1,0 +1,105 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="../../skin/help.css">
+
+</head>
+
+<body>
+
+    <div class="navigation">
+    <a class="navlink" href="about.html">About</a>
+    <a class="navlink" href="tutorial.html">Tutorial</a>
+    <span class="navsel">Options</span>
+    <a class="navlink" href="dialog.html">Dialog</a>
+    <a class="navlink" href="portable.html">Portable</a>
+    <a class="navlink" href="faq.html">FAQ</a>
+    <a class="navlink" href="changes.html">Changes</a>
+    <a class="navlink" href="http://wijjo.com/passhash/" target="_content">Home</a>
+    </div>
+
+    <h1>Security Levels</h1>
+
+    <ul>
+        <li>
+        <strong>Light</strong> maximizes convenience by guessing site tags,
+        remembering entries, and revealing fields as plain text.  It is secure from
+        remote hackers, but less secure from people with physical access to your
+        machine and browser.
+        </li>
+        <li>
+        <strong>Medium</strong> improves protection by hiding the hash word and
+        forcing you to re-enter the master key each time.  This is the default.
+        </li>
+        <li>
+        <strong>Heavy</strong> maximizes security by remembering nothing and hiding
+        everything.  You must enter the site tag and master key each time and
+        manually unmask fields to see their content.
+        </li>
+        <li>
+        <strong>Custom</strong> allows you to specify individual security options.
+        Tip - choose light, medium or heavy before selecting custom to start with a
+        reasonable set of checked options.
+        </li>
+    </ul>
+
+    <h1>Display Options</h1>
+    <ul>
+        <li>
+        <strong>Password field markers</strong> are small
+        <img alt="[#]" src="../../skin/marker.png"/>
+        symbols inserted next to password fields for one-click access to the
+        Password Hasher dialog.
+        </li>
+        <li>
+        <strong>Password unmasking markers</strong> are small
+        <img alt="[*]" src="../../skin/unmask.png"/>
+        symbols inserted next to password fields for one-click unmasking
+        (revealing as plain text) of password fields.
+        </li>
+        <li>
+        <strong>Guess full domain</strong> causes guessed site tags to use the
+        entire domain name, e.g. including ".com", ".org", etc., making it
+        easier to have separate logins for sites sharing the same base name.
+        It does result in longer site tags, when you have to type them.
+        </li>
+    </ul>
+
+    <h1>Default Requirements</h1>
+    <p>
+    These settings affect the default options for assuring generated hash words
+    satisfy certain requirements. 
+    </p>
+    <ul>
+        <li>
+        <strong>Digit</strong> forces hash words to have at least one digit
+        character.
+        </li>
+        <li>
+        <strong>Punctuation</strong> forces hash words to have at least one
+        punctuation character.
+        </li>
+        <li>
+        <strong>Both upper and lower-case letters</strong> forces hash words to
+        have at least one of each case letter.
+        </li>
+    </ul>
+
+    <h1>Default Size</h1>
+    <p>
+    This setting chooses the default hash word length, i.e. number of characters.
+    </p>
+
+    <h1>Portable Page</h1>
+    <p>
+    This button produces a self-contained/portable web page to generate hash
+    words when this extension is unavailable.  It asks you where to save the
+    file and then loads it in a browser tab.  More information is available
+    in the FAQ, the <a href="portable.html">Portable</a> help page, and notes
+    on the bottom of the generated portable page.
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css"  type="text/css"?>
+<?xml-stylesheet href="chrome://passhash/skin/passhash-options.css"  type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://passhash/locale/passhash.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    id="pshOpt" 
+    title="&pshOpt.title;" 
+    buttons="accept,cancel,disclosure,extra1"
+    onload="PassHashOptions.onLoad();"
+    ondialogaccept="return PassHashOptions.onAccept();"
+    ondialogdisclosure="PassHashOptions.onDisclosure();"
+    ondialogextra1="PassHashOptions.onShowPortable();"
+    buttonlabelaccept="&pshOpt.accept.label;"
+    buttonlabelcancel="&pshOpt.cancel.label;"
+    buttonlabeldisclosure="&pshOpt.disclosure.label;"
+    buttonlabelextra1="&pshOpt.showportable.label;"
+    buttonaccesskeyaccept="&pshOpt.accept.accesskey;"
+    buttonaccesskeycancel="&pshOpt.cancel.accesskey;"
+    buttonaccesskeydisclosure="&pshOpt.disclosure.accesskey;"
+    buttonaccesskeyextra1="&pshOpt.showportable.accesskey;"
+    >
+
+    <script src="passhash-common.js"/>
+    <script src="passhash-options.js"/>
+
+    <stringbundle id="pshOpt_strings" src="chrome://passhash/locale/passhash.properties"/>
+
+    <vbox>
+
+        <hbox>
+
+            <vbox>
+
+                <groupbox id="pshOpt_securityGroup">
+
+                    <caption label="&pshOpt.group1.label;"/>
+
+                    <radiogroup id="pshOpt_security">
+
+                        <vbox>
+
+                            <hbox>
+
+                                <radio id="pshOpt_security1"
+                                    label="&pshOpt.security1.label;"
+                                    accesskey="&pshOpt.security1.accesskey;"
+                                    value="1"
+                                    selected="false"/>
+
+                                <radio id="pshOpt_security2"
+                                    label="&pshOpt.security2.label;"
+                                    accesskey="&pshOpt.security2.accesskey;"
+                                    value="2"
+                                    selected="true"/>
+
+                                <radio id="pshOpt_security3"
+                                    label="&pshOpt.security3.label;"
+                                    accesskey="&pshOpt.security3.accesskey;"
+                                    value="3"
+                                    selected="false"/>
+                            </hbox>
+
+                            <hbox>
+
+                                <radio id="pshOpt_security4"
+                                    label="&pshOpt.security4.label;"
+                                    accesskey="&pshOpt.security4.accesskey;"
+                                    value="4"
+                                    selected="false"/>
+
+                            </hbox>
+
+                        </vbox>
+
+                    </radiogroup>
+
+                </groupbox>
+
+                <groupbox>
+
+                    <caption label="&pshOpt.group2.label;"/>
+
+                    <checkbox id="pshOpt_guessSiteTag"
+                        label="&pshOpt.guessSiteTag.label;"
+                        accesskey="&pshOpt.guessSiteTag.accesskey;"
+                        checked="false"/>
+
+                    <checkbox id="pshOpt_rememberSiteTag"
+                        label="&pshOpt.rememberSiteTag.label;"
+                        accesskey="&pshOpt.rememberSiteTag.accesskey;"
+                        checked="false"/>
+
+                    <checkbox id="pshOpt_rememberMasterKey"
+                        label="&pshOpt.rememberMasterKey.label;"
+                        accesskey="&pshOpt.rememberMasterKey.accesskey;"
+                        checked="false"/>
+
+                    <checkbox id="pshOpt_revealSiteTag"
+                        label="&pshOpt.revealSiteTag.label;"
+                        accesskey="&pshOpt.revealSiteTag.accesskey;"
+                        checked="false"/>
+
+                    <checkbox id="pshOpt_revealHashWord"
+                        label="&pshOpt.revealHashWord.label;"
+                        accesskey="&pshOpt.revealHashWord.accesskey;"
+                        checked="false"/>
+
+                </groupbox>
+
+            </vbox>
+
+            <vbox>
+
+                <groupbox>
+
+                    <caption label="&pshOpt.group3.label;"/>
+
+                    <checkbox id="pshOpt_showMarker"
+                        label="&pshOpt.showMarker.label;"
+                        accesskey="&pshOpt.showMarker.accesskey;"
+                        flex="1"
+                        checked="true"/>
+
+                    <checkbox id="pshOpt_unmaskMarker"
+                        label="&pshOpt.unmaskMarker.label;"
+                        accesskey="&pshOpt.unmaskMarker.accesskey;"
+                        flex="1"
+                        checked="false"/>
+
+                    <checkbox id="pshOpt_guessFullDomain"
+                        label="&pshOpt.guessFullDomain.label;"
+                        accesskey="&pshOpt.guessFullDomain.accesskey;"
+                        checked="false"/>
+
+                </groupbox>
+
+                <groupbox>
+
+                    <caption label="&pshOpt.group4.label;"/>
+
+                    <checkbox id="pshOpt_digitDefault"
+                        label="&pshOpt.digitDefault.label;"
+                        accesskey="&pshOpt.digitDefault.accesskey;"
+                        flex="1"
+                        checked="true"/>
+
+                    <checkbox id="pshOpt_punctuationDefault"
+                        label="&pshOpt.punctuationDefault.label;"
+                        accesskey="&pshOpt.punctuationDefault.accesskey;"
+                        flex="1"
+                        checked="true"/>
+
+                    <checkbox id="pshOpt_mixedCaseDefault"
+                        label="&pshOpt.mixedCaseDefault.label;"
+                        accesskey="&pshOpt.mixedCaseDefault.accesskey;"
+                        flex="1"
+                        checked="true"/>
+
+                </groupbox>
+
+                <groupbox>
+
+                    <caption label="&pshOpt.hashWordSizeDefault.label;"/>
+
+                    <hbox>
+
+                        <radiogroup id="pshOpt_hashWordSizeDefault">
+
+                            <vbox class="sizebox">
+
+                                <hbox>
+
+                                    <radio id="pshOpt_hashWordSizeDefault4"
+                                        label="4"
+                                        accesskey="4"
+                                        value="4"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault6"
+                                        label="6"
+                                        accesskey="6"
+                                        value="6"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault8"
+                                        label="8"
+                                        accesskey="8"
+                                        value="8"
+                                        selected="true"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault10"
+                                        label="10"
+                                        accesskey="0"
+                                        value="10"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault12"
+                                        label="12"
+                                        accesskey="2"
+                                        value="12"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault14"
+                                        label="14"
+                                        value="14"
+                                        selected="false"/>
+
+                                </hbox>
+
+                                <hbox class="hashWordSizeBox">
+
+                                    <radio id="pshOpt_hashWordSizeDefault16"
+                                        label="16"
+                                        value="16"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault18"
+                                        label="18"
+                                        value="18"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault20"
+                                        label="20"
+                                        value="20"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault22"
+                                        label="22"
+                                        value="22"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault24"
+                                        label="24"
+                                        value="24"
+                                        selected="false"/>
+
+                                    <radio id="pshOpt_hashWordSizeDefault26"
+                                        label="26"
+                                        value="26"
+                                        selected="false"/>
+
+                                </hbox>
+
+                            </vbox>
+
+                        </radiogroup>
+
+                    </hbox>
+
+                </groupbox>
+
+            </vbox>
+
+        </hbox>
+
+        <iframe id="pshOpt_notes"
+            src="chrome://passhash/locale/options.html"
+            minwidth="480"
+            minheight="360"
+            flex="1"
+            />
+
+    </vbox>
+
+</dialog>

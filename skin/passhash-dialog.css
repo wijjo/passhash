@@ -1,0 +1,22 @@
+.formlabel {
+    text-align: right;
+}
+
+.formfield {
+    font-weight: bold;
+    min-width: 240px;
+    max-width: 240px;
+}
+
+.formcheck {
+}
+
+.fieldbutton {
+    min-width: 90px;
+    max-width: 90px;
+    vertical-align: middle;
+}
+
+.formrow {
+    margin: 2px;
+}

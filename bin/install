@@ -1,0 +1,138 @@
+#!/usr/bin/env python
+
+import sys, os, os.path
+import re
+import shutil
+
+reId   = re.compile('em:id[ \t]*=[ \t]*"([^"]+)"')
+rePref = re.compile('user_pref[ \t]*[(][ \t]*"([^"]+)"[ \t]*,[ \t]*(true|false)[ \t)]')
+
+prefs = {
+    'extensions.checkUpdateSecurity'   : 'false' ,
+    'javascript.options.showInConsole' : 'true'  ,
+    'javascript.options.strict'        : 'true'  ,
+    'nglayout.debug.disable_xul_cache' : 'true'  ,
+}
+
+def info(*msgs):
+    for msg in msgs:
+        sys.stdout.write('%s\n' % msg)
+
+def warning(*msgs):
+    for msg in msgs:
+        sys.stdout.write('WARNING: %s\n' % msg)
+
+def error(*msgs):
+    for msg in msgs:
+        sys.stderr.write('ERROR: %s\n' % msg)
+
+def abort(*msgs):
+    error(*msgs)
+    sys.stderr.write('<ABORT>\n')
+    sys.exit(1)
+
+def heading(*msgs):
+    sys.stdout.write('\n')
+    for msg in msgs:
+        sys.stdout.write('::: %s\n' % msg)
+    sys.stdout.write('\n')
+
+def prompt(*msgs):
+    for msg in msgs:
+        sys.stdout.write('\n')
+        sys.stdout.write('%s' % msg)
+    sys.stdin.readline()
+
+def get_id(path):
+    f = open(path)
+    try:
+        for line in f:
+            m = reId.search(line)
+            if m:
+                return m.group(1)
+    finally:
+        f.close()
+    abort('Unable to find em:id in install.rdf')
+
+def register_extension(profile, id):
+    path = os.path.join(profile, 'extensions', id)
+    heading('Register extension "%s"' % path)
+    if os.path.exists(path):
+        warning('"%s" already exists' % path)
+    else:
+        f = open(path, 'w')
+        try:
+            f.write(id)
+        finally:
+            f.close()
+
+def update_preferences(profile):
+    path = os.path.join(profile, 'prefs.js')
+    heading('Update preferences "%s"' % path)
+    tmp  = path + '.tmp'
+    save = path + '.save'
+    fout = open(tmp, 'w')
+    done = set()
+    changes = 0
+    try:
+        if os.path.isfile(path):
+            fin = open(path)
+            try:
+                for line in fin:
+                    m = rePref.search(line)
+                    if m:
+                        pref  = m.group(1)
+                        value = m.group(2)
+                        if pref in prefs:
+                            done.add(pref)
+                            if value != prefs[pref]:
+                                info('Update: user_pref("%s", %s)' % (pref, prefs[pref]))
+                                fout.write('user_pref("%s", %s)\n' % (pref, prefs[pref]))
+                                changes += 1
+                            else:
+                                info('Okay: user_pref("%s", %s)' % (pref, prefs[pref]))
+                                fout.write(line)
+                        else:
+                            fout.write(line)
+                    else:
+                        fout.write(line)
+            finally:
+                fin.close()
+        names = prefs.keys()
+        names.sort()
+        for pref in names:
+            if pref not in done:
+                info('Add: user_pref("%s", %s)' % (pref, prefs[pref]))
+                fout.write('user_pref("%s", %s)\n' % (pref, prefs[pref]))
+                changes += 1
+    finally:
+        fout.close()
+    if changes > 0:
+        info('Overwriting "%s"...' % path)
+        shutil.copy(path, save)
+        shutil.move(tmp , path)
+    else:
+        info('No preference update needed')
+        os.remove(tmp)
+
+def install(profile):
+    id = get_id('install.rdf')
+    register_extension(profile, id)
+    update_preferences(profile)
+
+if (len(sys.argv) != 2 or
+    not os.path.isdir(os.path.join(sys.argv[1], 'extensions')) or
+    not os.path.isfile('install.rdf')):
+    info('',
+         'Usage: $0 PROFILE_DIRECTORY',
+         '',
+         '  PROFILE_DIRECTORY must exist and contain a Firefox profile',
+         '  Run from the extension development root (containing "install.rdf")',
+         '')
+    sys.exit(1)
+
+prompt('Make certain Firefox 3 is not running', 'Press Enter when ready to install...')
+
+install(sys.argv[1])
+
+sys.stdout.write('\n')

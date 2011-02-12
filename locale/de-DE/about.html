@@ -1,0 +1,86 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="../../skin/help.css">
+
+</head>
+
+<body>
+
+    <div class="navigation">
+    <span class="navsel">Über</span>
+    <a class="navlink" href="tutorial.html">Tutorial</a>
+    <a class="navlink" href="options.html">Optionen</a>
+    <a class="navlink" href="dialog.html">Dialog</a>
+    <a class="navlink" href="portable.html">Stickware</a>
+    <a class="navlink" href="faq.html">FAQ</a>
+    <a class="navlink" href="changes.html">Änderungen</a>
+    <a class="navlink" href="http://wijjo.com/passhash/" target="_content">WWW</a>
+    </div>
+
+    <h1>Einleitung</h1>
+
+    <h2>Vorgehensweise zur Gewährleistung hoher Sicherheit:</h2>
+    <ol>
+        <li>Starke Passwörter, die schwer zu erraten sind.</li>
+        <li>Verschiedene Passwörter für jede Seite.</li>
+        <li>Von Zeit zu Zeit bestehende Passwörter ändern.</li>
+    </ol>
+
+    <h2>Warum Sie wahrscheinlich keine hohe Sicherheit haben:</h2>
+    <ol>
+        <li>Starke Passwörter sind nur schwer zu merken.</li>
+        <li>Der Umgang mit einer Vielzahl an Passwörtern ist eine Qual.</li>
+        <li>Passwörter zu aktualisieren trägt zum Merkproblem bei.</li>
+    </ol>
+
+    <h2>Wie Password Hasher hilft:</h2>
+    <ul>
+        <li>Starke Passwörter werden automatisch generiert.</li>
+        <li>Der gleiche Master Key liefert auf vielen Seiten verschiedene Passwörter.</li>
+        <li>Sie können Passwörter schnell aktualisieren, wenn sie die Seitenkennung "variieren".</li>
+        <li>Sie können den Master Key aktualisieren, ohne alle Seiten gleichzeitig anzupassen.</li> 
+        <li>Er unterstützt unterschiedlich lange Passwörter.</li>
+        <li>Er unterstützt besondere Anforderungen, z.B. Ziffern und Satzzeichen.</li>
+        <li>Alle Daten werden in der sicheren Passwort-Datenbank des Browsers gespeichert.</li>
+    </ul>
+
+    <h1>Konzepte</h1>
+
+    <h2>Seitenkennung</h2>
+    <p>
+    Eine Seitenkennung ist ein einfacher Name, z.B. "google" oder "msn", der einer Seite zugewiesen
+    und verwendet wird, um einen Master Key zu erstellen. Auf niedriger und mittlerer Sicherheitsstufe
+    wird eine standardisierte Seitenkennung zugewiesen und immer bei Ihrer Rückkehr zu dieser Seite
+    ausgegeben. Diese Seitenkennung muss lediglich einmalig sein, nicht komplex.
+    </p>
+
+    <h2>Master Key</h2>
+    <p>
+    Ein Master Key ist ein starkes Passwort, das Sie erstellen und für viele (oder alle) Seiten
+    verwenden. Da Seitenkennungen den Master-Key verändern, um einmalige Passwörter zu erstellen,
+    brauchen Sie nur dann mehr als einen Master Key, wenn Sie ihn für zusätzliche Sicherheit aktualisieren
+    wollen. In diesem Fall beginnen Sie damit, Ihre Passwörter basierend auf dem neuen Master Key Seite für
+    Seite anzupassen. Sie müssen nicht alle auf einmal ändern!
+    </p>
+
+    <h2>Hash-Wort</h2>
+    <p>
+    Ein Hash-Wort ist das Ergebnis einer Vermischung des Master Keys mit der Seitenkennung. 
+    Es wird zum Passwort der Seite. Sie geben den Master Key im Password Hasher ein und dieser
+    schreibt das Hash-Wort in das Passwortfeld der Seite.
+    </p>
+
+    <h2>Den Password Hasher verwenden</h2>
+    <p>
+    Sie können den Dialog auf eine von folgenden Arten aufrufen:
+    </p>
+    <ul>
+        <li>Klicken Sie auf den <img alt="[#]" src="../../skin/marker.png"/> Marker beim Passwortfeld.</li>
+        <li>Drücken Sie die Tastenkombination <strong>Strg-F6</strong> innerhalb eines Passwortfeldes.</li>
+        <li>Wählen Sie <strong>Password Hasher</strong> entweder aus dem 'Extras'-Menü oder per Rechtsklick-Popup-Menü auf einem Passwortfeld.</li>
+    </ul>
+</body>
+
+</html>

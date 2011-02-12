@@ -1,0 +1,100 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="../../skin/help.css">
+
+</head>
+
+<body>
+
+    <div class="navigation">
+    <span class="navsel">About</span>
+    <a class="navlink" href="tutorial.html">Tutorial</a>
+    <a class="navlink" href="options.html">Options</a>
+    <a class="navlink" href="dialog.html">Dialog</a>
+    <a class="navlink" href="portable.html">Portable</a>
+    <a class="navlink" href="faq.html">FAQ</a>
+    <a class="navlink" href="changes.html">Changes</a>
+    <a class="navlink" href="http://wijjo.com/passhash/" target="_content">Home</a>
+    </div>
+
+    <h1>Introduction</h1>
+
+    <h2>What good security practice demands:</h2>
+    <ol>
+        <li>Strong passwords that are hard to guess.</li>
+        <li>Different passwords at each site.</li>
+        <li>Periodically changing existing passwords.</li>
+    </ol>
+
+    <h2>Why you probably aren't practicing good security:</h2>
+    <ol>
+        <li>Strong passwords are difficult to remember.</li>
+        <li>Juggling a multitude of passwords is a pain.</li>
+        <li>Updating passwords compounds the memorization problem.</li>
+    </ol>
+
+    <h2>How Password Hasher helps:</h2>
+    <ul>
+        <li>Strong passwords are automatically generated.</li>
+        <li>The same master key produces different passwords at many
+        sites.</li>
+        <li>You can quickly upgrade passwords by "bumping" the site tag.</li>
+        <li>You can upgrade the master key without updating all sites at
+        once.</li> 
+        <li>It supports different length passwords.</li>
+        <li>It supports special requirements, such as digit and punctuation
+        characters.</li>
+        <li>All data is saved to the browser's secure password database.</li>
+    </ul>
+
+    <h1>Concepts</h1>
+
+    <h2>Site Tag</h2>
+    <p>
+    A site tag is a simple name, e.g. "google" or "msn", assigned to a site and
+    used to scramble the master key.  For light and medium security levels a
+    default site tag is assigned and then provided whenever you return to the
+    site.  The site tag just needs to be unique.  It does not need to be
+    complex.
+    </p>
+
+    <h2>Master Key</h2>
+    <p>
+    A master key is a strong password you choose and use for many or all sites.
+    Since site tags scramble the master key to create unique passwords, you
+    only need more than one master key when you want to upgrade it for
+    additional security.  At that point you begin updating passwords based on
+    the new master key one site at a time.  You don't have to do them all at
+    once.
+    </p>
+
+    <h2>Hash Word</h2>
+    <p>
+    A hash word is the result of scrambling the master key with a site tag.  It
+    becomes the site password.  You give the master key to Password Hasher and
+    it enters the hash word into the site's password field.
+    </p>
+
+    <h2>Using the Password Hasher</h2>
+    <p>
+    You can bring up the dialog in any one of the following ways.
+    </p>
+    <ul>
+        <li>
+        Click on a <img alt="[#]" src="../../skin/marker.png"/>
+        marker next to a password field.
+        </li>
+        <li>
+        Press the <strong>Control-F6</strong> key combination when in a password
+        field.
+        </li>
+        <li>
+        Choose <strong>Password Hasher</strong> from either the Tools menu or
+        the right-click popup menu on a password field.
+        </li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!ENTITY passhashMenu.label                   "Password Hasher">
+<!ENTITY passhashMenu.accesskey               "h">
+<!ENTITY passhashMenu.keycode                 "VK_F6">
+<!ENTITY passhashMenu.keymodifiers            "accel">
+<!ENTITY pshDlg.title.label                   "Password Hasher">
+<!ENTITY pshDlg.site-tag.label                "Site tag">
+<!ENTITY pshDlg.master-key.label              "Master Key">
+<!ENTITY pshDlg.hash-word.label               "Hash Word">
+<!ENTITY pshDlg.bump.label                    "Bump">
+<!ENTITY pshDlg.unmask.label                  "Unmask">
+<!ENTITY pshDlg.disclosure.label              "More Info >>">
+<!ENTITY pshDlg.options.label                 "Options >>">
+<!ENTITY pshDlg.requirements.label            "Requirements">
+<!ENTITY pshDlg.restrictions.label            "Restrictions">
+<!ENTITY pshDlg.digit.label                   "At least one digit">
+<!ENTITY pshDlg.punctuation.label             "At least one punctuation character">
+<!ENTITY pshDlg.mixedCase.label               "Both upper and lower-case letters">
+<!ENTITY pshDlg.noSpecial.label               "No special characters">
+<!ENTITY pshDlg.digitsOnly.label              "Digits only">
+<!ENTITY pshDlg.hashWordSize.label            "Size">
+<!ENTITY pshDlg.accept.label                  "OK">
+<!ENTITY pshDlg.cancel.label                  "Cancel">
+<!ENTITY pshDlg.site-tag.accesskey            "S">
+<!ENTITY pshDlg.master-key.accesskey          "M">
+<!ENTITY pshDlg.hash-word.accesskey           "H">
+<!ENTITY pshDlg.bump.accesskey                "B">
+<!ENTITY pshDlg.unmask.accesskey              "U">
+<!ENTITY pshDlg.options.accesskey             "t">
+<!ENTITY pshDlg.digit.accesskey               "d">
+<!ENTITY pshDlg.punctuation.accesskey         "p">
+<!ENTITY pshDlg.mixedCase.accesskey           "w">
+<!ENTITY pshDlg.noSpecial.accesskey           "n">
+<!ENTITY pshDlg.digitsOnly.accesskey          "g">
+<!ENTITY pshDlg.accept.accesskey              "O">
+<!ENTITY pshDlg.cancel.accesskey              "C">
+<!ENTITY pshDlg.disclosure.accesskey          "I">
+<!ENTITY pshOpt.title                         "Password Hasher Options">
+<!ENTITY pshOpt.guessSiteTag.label            "Guess site tag">
+<!ENTITY pshOpt.rememberSiteTag.label         "Remember site tag">
+<!ENTITY pshOpt.rememberMasterKey.label       "Remember master key">
+<!ENTITY pshOpt.revealSiteTag.label           "Reveal site tag">
+<!ENTITY pshOpt.revealHashWord.label          "Reveal hash word">
+<!ENTITY pshOpt.accept.label                  "OK">
+<!ENTITY pshOpt.cancel.label                  "Cancel">
+<!ENTITY pshOpt.disclosure.label              "More Info >>">
+<!ENTITY pshOpt.showportable.label            "Portable Page">
+<!ENTITY pshOpt.showMarker.label              "Password field markers">
+<!ENTITY pshOpt.unmaskMarker.label            "Password unmasking markers">
+<!ENTITY pshOpt.guessFullDomain.label         "Guess full domain">
+<!ENTITY pshOpt.digitDefault.label            "At least one digit">
+<!ENTITY pshOpt.punctuationDefault.label      "At least one punctuation character">
+<!ENTITY pshOpt.mixedCaseDefault.label        "Both upper and lower-case letters">
+<!ENTITY pshOpt.hashWordSizeDefault.label     "Default Size">
+<!ENTITY pshOpt.group1.label                  "Security Level">
+<!ENTITY pshOpt.group2.label                  "Custom Options">
+<!ENTITY pshOpt.group3.label                  "Interface Options">
+<!ENTITY pshOpt.group4.label                  "Default Requirements">
+<!ENTITY pshOpt.security1.label               "Light">
+<!ENTITY pshOpt.security2.label               "Medium">
+<!ENTITY pshOpt.security3.label               "Heavy">
+<!ENTITY pshOpt.security4.label               "Custom">
+<!ENTITY pshOpt.security1.accesskey           "L">
+<!ENTITY pshOpt.security2.accesskey           "M">
+<!ENTITY pshOpt.security3.accesskey           "H">
+<!ENTITY pshOpt.security4.accesskey           "u">
+<!ENTITY pshOpt.guessSiteTag.accesskey        "G">
+<!ENTITY pshOpt.rememberSiteTag.accesskey     "s">
+<!ENTITY pshOpt.rememberMasterKey.accesskey   "k">
+<!ENTITY pshOpt.revealSiteTag.accesskey       "t">
+<!ENTITY pshOpt.revealHashWord.accesskey      "w">
+<!ENTITY pshOpt.showMarker.accesskey          "P">
+<!ENTITY pshOpt.unmaskMarker.accesskey        "a">
+<!ENTITY pshOpt.guessFullDomain.accesskey     "f">
+<!ENTITY pshOpt.digitDefault.accesskey        "d">
+<!ENTITY pshOpt.punctuationDefault.accesskey  "n">
+<!ENTITY pshOpt.mixedCaseDefault.accesskey    "B">
+<!ENTITY pshOpt.hashWordSizeDefault.accesskey "z">
+<!ENTITY pshOpt.accept.accesskey              "O">
+<!ENTITY pshOpt.cancel.accesskey              "C">
+<!ENTITY pshOpt.disclosure.accesskey          "I">
+<!ENTITY pshOpt.showportable.accesskey        "r">
