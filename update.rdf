@@ -3,21 +3,21 @@
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <RDF:Description RDF:about="rdf:#$nuMet3"
-                   NS1:version="1.1.6">
+                   NS1:version="1.1.7">
     <NS1:targetApplication RDF:resource="rdf:#$quMet3"/>
   </RDF:Description>
   <RDF:Seq RDF:about="rdf:#$muMet3">
     <RDF:li RDF:resource="rdf:#$nuMet3"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:passhash@mozilla.wijjo.com"
-                   NS1:version="1.1.6"
-                   NS1:updateLink="http://wijjo.com/passhash/passhash-1.1.6.xpi"
+                   NS1:version="1.1.7"
+                   NS1:updateLink="http://wijjo.com/passhash/passhash-1.1.7.xpi"
                    NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBABfhsR7c46zesUQGltsiMqQjmSL+UVCub/KltfZ4wNklh8FmYjYt4OYcMNlnevt5wpYn1nkuZ0rQ2zKqjNKS04+fR8xOLTEZN6j/5bvJBAazgUAr7kjaLazzQtBmwmTGa0+nEuWsKLBJRmTWCoNJQN2xqW5kF22KzyzClV/0UWKv">
     <NS1:updates RDF:resource="rdf:#$muMet3"/>
   </RDF:Description>
   <RDF:Description RDF:about="rdf:#$quMet3"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="1.5"
-                   NS1:maxVersion="3.6.*"
-                   NS1:updateLink="http://wijjo.com/passhash/passhash-1.1.6.xpi" />
+                   NS1:maxVersion="9.0.*"
+                   NS1:updateLink="http://wijjo.com/passhash/passhash-1.1.7.xpi" />
 </RDF:RDF>

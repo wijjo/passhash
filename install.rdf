@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="passhash@mozilla.wijjo.com"
                    em:name="Password Hasher"
-                   em:version="1.1.6"
+                   em:version="1.1.7"
                    em:creator="Steve Cooper"
                    em:description="Better security without bursting your brain"
                    em:homepageURL="http://wijjo.com/passhash/"
@@ -16,6 +16,7 @@
                    em:contributor="Based on concept and code from http://hashapass.com/."
                    em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDKQkKxVJ9S1kVms5ETSUFc5gOuIxQb4pvBlprslITTjKmtfyC0JjaPjc1S49PFDR4MRHZ1p7tWJJps+naO8SdXEqRUdpvroeg0aXE+HwfEfdeBWHQAMGPZeEU/wv526V6V+pqUV1Tb9fDKQ2QqzQBIy6Yuf0uehLQ10eJWiiUiQIDAQAB">
     <em:targetApplication RDF:resource="rdf:#$pu7fu"/>
+    <em:unpack>true</em:unpack>
     <em:localized>
         <Description>
             <em:locale>en-EN</em:locale>
@@ -37,5 +38,5 @@
   <RDF:Description RDF:about="rdf:#$pu7fu"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="1.5"
-                   em:maxVersion="3.6.*" />
+                   em:maxVersion="9.0.*" />
 </RDF:RDF>

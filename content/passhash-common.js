@@ -785,5 +785,7 @@ var PassHashCommon =
         }
         while (file.exists() && (action == 0));
         return file;
-    },
+    }
+
+    //NB: Make sure not to add a comma after the last function for older IE compatibility.
 }
