@@ -38,5 +38,5 @@
   <RDF:Description RDF:about="rdf:#$pu7fu"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="1.5"
-                   em:maxVersion="9.0.*" />
+                   em:maxVersion="9.*" />
 </RDF:RDF>

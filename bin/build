@@ -129,7 +129,7 @@ def build(buildDir, mozilla):
     version = copyInstallRDF('install.rdf', os.path.join(buildDir, 'install.rdf'), mozilla)
 
     # Determine paths for compressed files
-    name = os.path.split(os.getcwd())[1]
+    name = os.path.split(os.getcwd())[1].lower()
     chromeJarPath = os.path.join(buildDir, chromeSubDir, '%s.jar' % name)
     if mozilla:
         xpiPath = '%s-%s-mozilla.xpi' % (name, version)
