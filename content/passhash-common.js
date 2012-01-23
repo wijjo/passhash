@@ -36,7 +36,7 @@
 var PassHashCommon =
 {
     // Artificial host name used for for saving to the password database
-    host: "passhash.passhash",
+    host: "chrome://passhash",
 
     log: function(msg)
     {
