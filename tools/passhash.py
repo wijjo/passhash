@@ -151,11 +151,26 @@ def convertToDigits(sInput, seed, lenOut):
 
 
 if __name__ == "__main__":
-    site = sys.argv[1]
-    passw = getpass.getpass()
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='generate PassHash hases from the commandline')
+    parser.add_argument('siteTag', nargs=1, help='The "siteTag" to use')
+    parser.add_argument('--hash-size', type=int, default=8)
+    parser.add_argument('--require-digest', type=bool, default=True)
+    parser.add_argument('--require-punctuation', type=bool, default=True)
+    parser.add_argument('--require-mixed-case', type=bool, default=True)
+    parser.add_argument('--restrict-special', type=bool, default=False)
+    parser.add_argument('--restrict-digits', type=bool, default=False)
+    args = parser.parse_args()
+
+    site = args.siteTag[0]
+    passw = getpass.getpass("Please enter the master key: ")
     size = 14                   
     pw = generateHashWord(
-            site, passw, size, requireDigit=True, requirePunctuation=True,
-            requireMixedCase=True, restrictSpecial=False,
-            restrictDigits=False)
+            site, passw, args.hash_size, 
+            requireDigit=args.require_digest,
+            requirePunctuation=args.require_punctuation,
+            requireMixedCase=args.require_mixed_case,
+            restrictSpecial=args.restrict_special,
+            restrictDigits=args.restrict_digits)
     print(pw)
