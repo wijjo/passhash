@@ -33,10 +33,16 @@
 # 
 #  ***** END LICENSE BLOCK ***** */
 
+import getpass
+import hashlib
+import hmac
+import sys
+from base64 import b64encode
+
 host =  "passhash.passhash"
 
 def log(msg):
-    print msg
+    print(msg)
 
 #  IMPORTANT: This function should be changed carefully.  It must be
 #  completely deterministic and consistent between releases.  Otherwise
@@ -58,7 +64,9 @@ def generateHashWord(
             restrictSpecial,
             restrictDigits):
     # Start with the SHA1-encrypted master key/site tag.
-    s = b64_hmac_sha1(masterKey, siteTag)
+    #s = b64_hmac_sha1(masterKey, siteTag)
+    h = hmac.new(masterKey, siteTag, hashlib.sha1)
+    s = b64encode(h.digest())
     # Use the checksum of all characters as a pseudo-randomizing seed to
     # avoid making the injected characters easy to guess.  Note that it
     # isn't random in the sense of not being deterministic (i.e.
@@ -66,7 +74,7 @@ def generateHashWord(
     # characters so that they are guaranteed unique positions based on
     # their offsets.
     sum = 0
-    for i in range(len(s):
+    for i in range(len(s)):
         sum += ord(s[i])
     # Restrict digits just does a mod 10 of all the characters
     if restrictDigits:
@@ -84,7 +92,7 @@ def generateHashWord(
         if restrictSpecial:
             s = removeSpecialCharacters(s, sum, hashWordSize)
     # Trim it to size.
-    return s.substr(0, hashWordSize)
+    return s[:hashWordSize]
 
 # This is a very specialized method to inject a character chosen from a
 # range of character codes into a block at the front of a string if one of
@@ -138,4 +146,16 @@ def convertToDigits(sInput, seed, lenOut):
         if c.isdigit():
             s += c
         else:
-            s += chr((seed + ord(sInput[i])) % 10 + 48)
+            s += chr((seed + ord(c)) % 10 + 48)
+    return s
+
+
+if __name__ == "__main__":
+    site = sys.argv[1]
+    passw = getpass.getpass()
+    size = 14                   
+    pw = generateHashWord(
+            site, passw, size, requireDigit=True, requirePunctuation=True,
+            requireMixedCase=True, restrictSpecial=False,
+            restrictDigits=False)
+    print(pw)
