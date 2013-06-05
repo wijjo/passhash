@@ -303,10 +303,14 @@ var PassHashCommon =
                 requirePunctuation,
                 requireMixedCase,
                 restrictSpecial,
-                restrictDigits)
+                restrictDigits,
+                hash_algorithm)
     {
-        // Start with the SHA1-encrypted master key/site tag.
-        var s = b64_hmac_sha1(masterKey, siteTag);
+        // Start with the SHA-encrypted master key/site tag.
+        if (hash_algorithm === "sha512")
+            var s = b64_hmac_sha512(masterKey, siteTag);
+        else
+            var s = b64_hmac_sha1(masterKey, siteTag);
         // Use the checksum of all characters as a pseudo-randomizing seed to
         // avoid making the injected characters easy to guess.  Note that it
         // isn't random in the sense of not being deterministic (i.e.
@@ -789,3 +793,5 @@ var PassHashCommon =
 
     //NB: Make sure not to add a comma after the last function for older IE compatibility.
 }
+
+exports.PassHashCommon = PassHashCommon;

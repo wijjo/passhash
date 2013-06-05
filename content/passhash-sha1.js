@@ -223,3 +223,6 @@ function binb2b64(binarray)
   }
   return str;
 }
+
+if (exports !== null)
+  exports.b64_hmac_sha1 = b64_hmac_sha1;

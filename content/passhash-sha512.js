@@ -495,3 +495,5 @@ function int64add5(dst, a, b, c, d, e)
    dst.h = (w2 & 0xffff) | (w3 << 16);
 }
 
+if (exports !== null)
+  exports.b64_hmac_sha512 = b64_hmac_sha512;
