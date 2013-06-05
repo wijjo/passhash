@@ -29,6 +29,10 @@
         />
 
     <script
+        src="passhash-sha512.js"
+        />
+
+    <script
         src="passhash-common.js"
         />
 
