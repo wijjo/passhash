@@ -78,6 +78,7 @@ var PassHash =
         this.restrictSpecial    = false;
         this.restrictDigits     = false;
         this.hashWordSize       = prefs.hashWordSizeDefault;
+        this.hashAlgorithm      = prefs.hashAlgorithm;
 
         this.onUnmask();
 
@@ -251,7 +252,8 @@ var PassHash =
                 this.requirePunctuation,
                 this.requireMixedCase,
                 this.restrictSpecial,
-                this.restrictDigits);
+                this.restrictDigits,
+                this.hashAlgorithm);
         if (ctlHashWord.value != hashWordOrig)
             return 3;   // It was modified
         return 0;       // It was not modified

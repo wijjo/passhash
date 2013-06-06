@@ -83,6 +83,8 @@ var PassHashCommon =
             opts.hashWordSizeDefault = prefs.getIntPref("optHashWordSizeDefault");
         if (prefs.prefHasUserValue("optShortcutKeyCode"))
             opts.shortcutKeyCode = prefs.getCharPref("optShortcutKeyCode");
+        if (prefs.prefHasUserValue("optHashAlgorithm"))
+            opts.hashAlgorithm = prefs.getCharPref("optHashAlgorithm");
         if (!opts.shortcutKeyCode)
         {
             // Set shortcut key to XUL-defined default.
@@ -130,6 +132,7 @@ var PassHashCommon =
         opts.firstTime           = true;
         opts.shortcutKeyCode     = "";
         opts.shortcutKeyMods     = "";
+        opts.hashAlgorithm       = "sha1";
         return opts;
     },
 
@@ -152,6 +155,7 @@ var PassHashCommon =
         prefs.setIntPref( "optHashWordSizeDefault", opts.hashWordSizeDefault);
         prefs.setCharPref("optShortcutKeyCode",     opts.shortcutKeyCode);
         prefs.setCharPref("optShortcutKeyMods",     opts.shortcutKeyMods);
+        prefs.setCharPref("optHashAlgorithm",       opts.hashAlgorithm);
     },
 
     loadSecureValue: function(option, name, suffix, valueDefault)
