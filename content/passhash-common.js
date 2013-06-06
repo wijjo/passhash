@@ -798,4 +798,5 @@ var PassHashCommon =
     //NB: Make sure not to add a comma after the last function for older IE compatibility.
 }
 
-exports.PassHashCommon = PassHashCommon;
+if (exports !== null)
+    exports.PassHashCommon = PassHashCommon;

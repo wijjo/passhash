@@ -361,3 +361,6 @@ var PassHash =
     }
 
 }
+
+if (exports !== null)
+    exports.PassHashDialog = PassHash;
