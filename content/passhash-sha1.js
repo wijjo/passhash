@@ -224,5 +224,5 @@ function binb2b64(binarray)
   return str;
 }
 
-if (exports !== null)
+if (typeof exports !== 'undefined')
   exports.b64_hmac_sha1 = b64_hmac_sha1;
