@@ -330,8 +330,11 @@ var PassHash =
         return true;
     },
 
-    parseOptionString: function(s)
+    parseOptionString: function(full_options)
     {
+        var s = full_options.split("/")[0];
+        this.hashAlgorithm = full_options.split("/")[1] || "sha1";
+
         this.requireDigit       = (s.search(/d/i) >= 0);
         this.requirePunctuation = (s.search(/p/i) >= 0);
         this.requireMixedCase   = (s.search(/m/i) >= 0);
@@ -357,6 +360,8 @@ var PassHash =
         if (this.restrictDigits)
             opts += 'g';
         opts += this.hashWordSize.toString();
+        if (this.hashAlgorithm)
+            opts += "/"+this.hashAlgorihtm;
         return opts;
     }
 

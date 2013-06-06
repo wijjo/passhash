@@ -27,16 +27,18 @@ suite('PassHashCommon', function() {
 
 suite('PassHashDialog', function() {
 
-    test('getOptionString', function() {
+    setup(function() {
         PassHashDialog.requireDigit = true;
         PassHashDialog.requirePunctuation = true;
         PassHashDialog.requireMixedCase = true;
         PassHashDialog.restrictSpecial = false;
         PassHashDialog.restrictDigits = false;
-        PassHashDialog.hashWordSize = 10;
-
+        PassHashDialog.hashWordSize = 8;
+    });
+    
+    test('getOptionString', function() {
         var optStr = PassHashDialog.getOptionString()
-        assert.equal(optStr, "dpm10");
+        assert.equal(optStr, "dpm8");
     });
 
     test('parseOptionString', function() {
@@ -47,6 +49,20 @@ suite('PassHashDialog', function() {
         assert.equal(PassHashDialog.restrictSpecial, true);
         assert.equal(PassHashDialog.restrictDigits, false);
         assert.equal(PassHashDialog.hashWordSize, 12);
+        assert.equal(PassHashDialog.hashAlgorithm, "sha1");
     });
+
+    test('parseOptionString sha512', function() {
+        PassHashDialog.parseOptionString("dpr12/sha512");
+        assert.equal(PassHashDialog.hashAlgorithm, "sha512");
+    });
+
+    test('getOptionString sha512', function() {
+        PassHashDialog.hashAlgorihtm = "sha512";
+        var options_string = PassHashDialog.getOptionString();
+        assert.equal(options_string, "dpm8/sha512");
+       
+    });
+
 
 });
