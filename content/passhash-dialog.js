@@ -53,6 +53,7 @@ var PassHash =
     restrictSpecial:     null,
     restrictDigits:      null,
     hashWordSize:        null,
+    hashAlgorithm:       null,
 
     onLoad: function()
     {
@@ -64,6 +65,7 @@ var PassHash =
         var ctlRestrictSpecial    = document.getElementById("noSpecial");
         var ctlRestrictDigits     = document.getElementById("digitsOnly");
         var ctlHashWordSize       = document.getElementById("hashWordSize");
+        var ctlHashAlgorithm      = document.getElementById("hashAlgorithm");
 
         var prefs = PassHashCommon.loadOptions();
         this.guessSiteTag       = prefs.guessSiteTag;
@@ -114,6 +116,15 @@ var PassHash =
         ctlRestrictSpecial.checked     = this.restrictSpecial;
         ctlRestrictDigits.checked      = this.restrictDigits;
         this.updateCheckboxes();
+
+        var menulist = document.getElementById("hashAlgorithm");
+        for (var i=0;menulist.getItemAtIndex(i) !== null; i++) {
+            var menuitem = menulist.getItemAtIndex(i);
+            if (menuitem.value === this.hashAlgorithm) {
+                menulist.selectedItem = menuitem;
+                break;
+            }
+        }
 
         var btn = document.getElementById("hashWordSize"+this.hashWordSize);
         // Protect against bad saved hashWordSize value.
@@ -295,6 +306,13 @@ var PassHash =
         this.update();
     },
 
+    onHashAlgorithmChanged: function()
+    {
+        var menuitem = document.getElementById("hashAlgorithm").selectedItem;
+        this.hashAlgorithm = menuitem.value;
+        this.update();
+    },
+
     updateCheckboxes: function()
     {
         document.getElementById("digit").disabled =
@@ -361,11 +379,11 @@ var PassHash =
             opts += 'g';
         opts += this.hashWordSize.toString();
         if (this.hashAlgorithm)
-            opts += "/"+this.hashAlgorihtm;
+            opts += "/"+this.hashAlgorithm;
         return opts;
     }
 
 }
 
-if (exports !== null)
+if (typeof exports !== 'undefined')
     exports.PassHashDialog = PassHash;

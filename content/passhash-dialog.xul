@@ -234,6 +234,23 @@
 
                 </groupbox>
 
+        <groupbox
+            id="algorithmGroup"
+            >
+          <caption
+              label="Hash"
+              />
+          <menulist id="hashAlgorithm"
+                    oncommand="PassHash.onHashAlgorithmChanged();"
+            >
+            <menupopup>
+              <menuitem label="Sha1" value="sha1"/>
+              <menuitem label="Sha512" value="sha512"/>
+            </menupopup>
+          </menulist>
+        </groupbox>
+
+
             </vbox>
 
             <groupbox
@@ -364,6 +381,7 @@
                 </radiogroup>
 
             </groupbox>
+
 
         </hbox>
 
