@@ -7,6 +7,7 @@ var PassHashDialog = require('../content/passhash-dialog.js').PassHashDialog;
 // global
 b64_hmac_sha1 = require("../content/passhash-sha1.js").b64_hmac_sha1;
 b64_hmac_sha512 = require("../content/passhash-sha512.js").b64_hmac_sha512;
+b64_crypt_sha512 = require("../content/passhash-sha512.js").b64_crypt_sha512;
 
 
 suite('PassHashCommon', function() {
@@ -21,6 +22,12 @@ suite('PassHashCommon', function() {
         var hash =  PassHashCommon.generateHashWord(
             'site', 'master', 14, true, true, true, false, false, 'sha512');
         assert.equal(hash, 'xvOxv4L!fxqBFD');
+    });
+
+    test('generateHashWord sha512crypt', function() {
+        var hash =  PassHashCommon.generateHashWord(
+            'site', 'master', 14, true, true, true, false, false,'sha512crypt');
+        assert.equal(hash, '(zozvaI1YFbDBJ');
     });
     
 });
@@ -61,8 +68,17 @@ suite('PassHashDialog', function() {
         PassHashDialog.hashAlgorihtm = "sha512";
         var options_string = PassHashDialog.getOptionString();
         assert.equal(options_string, "dpm8/sha512");
-       
     });
 
+    test('parseOptionString sha512', function() {
+        PassHashDialog.parseOptionString("dpr12/sha512crypt");
+        assert.equal(PassHashDialog.hashAlgorithm, "sha512crypt");
+    });
+
+    test('getOptionString sha512crypt', function() {
+        PassHashDialog.hashAlgorihtm = "sha512crypt";
+        var options_string = PassHashDialog.getOptionString();
+        assert.equal(options_string, "dpm8/sha512crypt");
+    });
 
 });

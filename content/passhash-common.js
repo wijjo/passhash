@@ -132,7 +132,7 @@ var PassHashCommon =
         opts.firstTime           = true;
         opts.shortcutKeyCode     = "";
         opts.shortcutKeyMods     = "";
-        opts.hashAlgorithm       = "sha1";
+        opts.hashAlgorithm       = "sha512crypt";
         return opts;
     },
 
@@ -311,7 +311,9 @@ var PassHashCommon =
                 hash_algorithm)
     {
         // Start with the SHA-encrypted master key/site tag.
-        if (hash_algorithm === "sha512")
+        if (hash_algorithm === "sha512crypt")
+            var s = b64_crypt_sha512(masterKey, siteTag);
+        else if (hash_algorithm === "sha512")
             var s = b64_hmac_sha512(masterKey, siteTag);
         else
             var s = b64_hmac_sha1(masterKey, siteTag);

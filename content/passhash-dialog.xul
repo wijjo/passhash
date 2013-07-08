@@ -29,7 +29,11 @@
         />
 
     <script
-        src="passhash-sha512.js"
+        src="sha512crypt/sha512.js"
+        />
+
+    <script
+        src="sha512crypt/sha512crypt.js"
         />
 
     <script
@@ -246,6 +250,7 @@
             <menupopup>
               <menuitem label="Sha1" value="sha1"/>
               <menuitem label="Sha512" value="sha512"/>
+              <menuitem label="Sha512crypt" value="sha512crypt"/>
             </menupopup>
           </menulist>
         </groupbox>
