@@ -33,6 +33,10 @@
         />
 
     <script
+        src="passhash-sha512crypt-ctypes.js"
+        />
+
+    <script
         src="sha512crypt/sha512.js"
         />
 
