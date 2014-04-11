@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/nodejs
 
 // import b64_hmac_sha{512,1} global to avoid having to import it in 
 //  passhash-common.js
@@ -17,7 +17,7 @@ console.log("using site='%s' master='%s' algorithm='%s'\n",
             site, master, sha_algorithm);
 var pw = passhash.PassHashCommon.generateHashWord(
         site,
-        "master",
+        master,
         14,
         true,
         true,

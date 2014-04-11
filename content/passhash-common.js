@@ -312,8 +312,11 @@ var PassHashCommon =
     {
         // Start with the SHA-encrypted master key/site tag.
         if (hash_algorithm === "sha512crypt") {
-            //var s = b64_crypt_sha512(masterKey, siteTag);
-            var s = b64_sha512crypt_native(masterKey, siteTag);
+            // use the native version if available
+            if (typeof(b64_sha512crypt_native) !== 'undefined')
+                var s = b64_sha512crypt_native(masterKey, siteTag);
+            else
+                var s = b64_crypt_sha512(masterKey, siteTag);
        } else if (hash_algorithm === "sha512")
             var s = b64_hmac_sha512(masterKey, siteTag);
         else
