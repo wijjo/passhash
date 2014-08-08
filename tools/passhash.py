@@ -66,7 +66,7 @@ def generateHashWord(
     # characters so that they are guaranteed unique positions based on
     # their offsets.
     sum = 0
-    for i in range(len(s):
+    for i in range(len(s)):
         sum += ord(s[i])
     # Restrict digits just does a mod 10 of all the characters
     if restrictDigits:
