@@ -36,7 +36,7 @@
 var PassHashCommon =
 {
     // Artificial host name used for for saving to the password database
-    host: "passhash.passhash",
+    host: "chrome://passhash",
 
     log: function(msg)
     {
@@ -280,8 +280,13 @@ var PassHashCommon =
         if (h.length <= 1)
             return null;
         // Handle domains like co.uk
-        if (h.length > 2 && h[h.length-1].length == 2 && h[h.length-2] == "co")
+        if (h.length > 2) {
+            var p = h[h.length-2];
+            if (p == "com" || p == "net" || p == "org" || p == "edu"
+                           || p == "gov" || p == "info"
+                           || p == "co" || p == "ac")
             return h[h.length-3] + '.' + h[h.length-2] + '.' + h[h.length-1];
+        }
         return h[h.length-2] + '.' + h[h.length-1];
     },
 
