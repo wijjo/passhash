@@ -53,6 +53,7 @@ var PassHash =
     restrictSpecial:     null,
     restrictDigits:      null,
     hashWordSize:        null,
+    hashAlgorithm:       null,
 
     onLoad: function()
     {
@@ -64,6 +65,7 @@ var PassHash =
         var ctlRestrictSpecial    = document.getElementById("noSpecial");
         var ctlRestrictDigits     = document.getElementById("digitsOnly");
         var ctlHashWordSize       = document.getElementById("hashWordSize");
+        var ctlHashAlgorithm      = document.getElementById("hashAlgorithm");
 
         var prefs = PassHashCommon.loadOptions();
         this.guessSiteTag       = prefs.guessSiteTag;
@@ -78,6 +80,7 @@ var PassHash =
         this.restrictSpecial    = false;
         this.restrictDigits     = false;
         this.hashWordSize       = prefs.hashWordSizeDefault;
+        this.hashAlgorithm      = prefs.hashAlgorithm;
 
         this.onUnmask();
 
@@ -113,6 +116,15 @@ var PassHash =
         ctlRestrictSpecial.checked     = this.restrictSpecial;
         ctlRestrictDigits.checked      = this.restrictDigits;
         this.updateCheckboxes();
+
+        var menulist = document.getElementById("hashAlgorithm");
+        for (var i=0;menulist.getItemAtIndex(i) !== null; i++) {
+            var menuitem = menulist.getItemAtIndex(i);
+            if (menuitem.value === this.hashAlgorithm) {
+                menulist.selectedItem = menuitem;
+                break;
+            }
+        }
 
         var btn = document.getElementById("hashWordSize"+this.hashWordSize);
         // Protect against bad saved hashWordSize value.
@@ -251,7 +263,8 @@ var PassHash =
                 this.requirePunctuation,
                 this.requireMixedCase,
                 this.restrictSpecial,
-                this.restrictDigits);
+                this.restrictDigits,
+                this.hashAlgorithm);
         if (ctlHashWord.value != hashWordOrig)
             return 3;   // It was modified
         return 0;       // It was not modified
@@ -293,6 +306,13 @@ var PassHash =
         this.update();
     },
 
+    onHashAlgorithmChanged: function()
+    {
+        var menuitem = document.getElementById("hashAlgorithm").selectedItem;
+        this.hashAlgorithm = menuitem.value;
+        this.update();
+    },
+
     updateCheckboxes: function()
     {
         document.getElementById("digit").disabled =
@@ -328,8 +348,11 @@ var PassHash =
         return true;
     },
 
-    parseOptionString: function(s)
+    parseOptionString: function(full_options)
     {
+        var s = full_options.split("/")[0];
+        this.hashAlgorithm = full_options.split("/")[1] || "sha1";
+
         this.requireDigit       = (s.search(/d/i) >= 0);
         this.requirePunctuation = (s.search(/p/i) >= 0);
         this.requireMixedCase   = (s.search(/m/i) >= 0);
@@ -355,7 +378,12 @@ var PassHash =
         if (this.restrictDigits)
             opts += 'g';
         opts += this.hashWordSize.toString();
+        if (this.hashAlgorithm)
+            opts += "/"+this.hashAlgorithm;
         return opts;
     }
 
 }
+
+if (typeof exports !== 'undefined')
+    exports.PassHashDialog = PassHash;
