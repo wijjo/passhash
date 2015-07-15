@@ -83,6 +83,8 @@ var PassHashCommon =
             opts.hashWordSizeDefault = prefs.getIntPref("optHashWordSizeDefault");
         if (prefs.prefHasUserValue("optShortcutKeyCode"))
             opts.shortcutKeyCode = prefs.getCharPref("optShortcutKeyCode");
+        if (prefs.prefHasUserValue("optHashAlgorithm"))
+            opts.hashAlgorithm = prefs.getCharPref("optHashAlgorithm");
         if (!opts.shortcutKeyCode)
         {
             // Set shortcut key to XUL-defined default.
@@ -130,6 +132,7 @@ var PassHashCommon =
         opts.firstTime           = true;
         opts.shortcutKeyCode     = "";
         opts.shortcutKeyMods     = "";
+        opts.hashAlgorithm       = "sha512crypt";
         return opts;
     },
 
@@ -152,6 +155,7 @@ var PassHashCommon =
         prefs.setIntPref( "optHashWordSizeDefault", opts.hashWordSizeDefault);
         prefs.setCharPref("optShortcutKeyCode",     opts.shortcutKeyCode);
         prefs.setCharPref("optShortcutKeyMods",     opts.shortcutKeyMods);
+        prefs.setCharPref("optHashAlgorithm",       opts.hashAlgorithm);
     },
 
     loadSecureValue: function(option, name, suffix, valueDefault)
@@ -303,10 +307,20 @@ var PassHashCommon =
                 requirePunctuation,
                 requireMixedCase,
                 restrictSpecial,
-                restrictDigits)
+                restrictDigits,
+                hash_algorithm)
     {
-        // Start with the SHA1-encrypted master key/site tag.
-        var s = b64_hmac_sha1(masterKey, siteTag);
+        // Start with the SHA-encrypted master key/site tag.
+        if (hash_algorithm === "sha512crypt") {
+            // use the native version if available
+            if (typeof(b64_sha512crypt_native) !== 'undefined')
+                var s = b64_sha512crypt_native(masterKey, siteTag);
+            else
+                var s = b64_crypt_sha512(masterKey, siteTag);
+       } else if (hash_algorithm === "sha512")
+            var s = b64_hmac_sha512(masterKey, siteTag);
+        else
+            var s = b64_hmac_sha1(masterKey, siteTag);
         // Use the checksum of all characters as a pseudo-randomizing seed to
         // avoid making the injected characters easy to guess.  Note that it
         // isn't random in the sense of not being deterministic (i.e.
@@ -789,3 +803,6 @@ var PassHashCommon =
 
     //NB: Make sure not to add a comma after the last function for older IE compatibility.
 }
+
+if (typeof exports !== 'undefined')
+    exports.PassHashCommon = PassHashCommon;

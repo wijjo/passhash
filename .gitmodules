@@ -1,0 +1,3 @@
+[submodule "content/sha512crypt"]
+	path = content/sha512crypt
+	url = git://github.com/mvo5/sha512crypt-node

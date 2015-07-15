@@ -29,6 +29,22 @@
         />
 
     <script
+        src="passhash-sha512.js"
+        />
+
+    <script
+        src="passhash-sha512crypt-ctypes.js"
+        />
+
+    <script
+        src="sha512crypt/sha512.js"
+        />
+
+    <script
+        src="sha512crypt/sha512crypt.js"
+        />
+
+    <script
         src="passhash-common.js"
         />
 
@@ -230,6 +246,24 @@
 
                 </groupbox>
 
+        <groupbox
+            id="algorithmGroup"
+            >
+          <caption
+              label="Hash"
+              />
+          <menulist id="hashAlgorithm"
+                    oncommand="PassHash.onHashAlgorithmChanged();"
+            >
+            <menupopup>
+              <menuitem label="Sha1" value="sha1"/>
+              <menuitem label="Sha512" value="sha512"/>
+              <menuitem label="Sha512crypt" value="sha512crypt"/>
+            </menupopup>
+          </menulist>
+        </groupbox>
+
+
             </vbox>
 
             <groupbox
@@ -360,6 +394,7 @@
                 </radiogroup>
 
             </groupbox>
+
 
         </hbox>
 
