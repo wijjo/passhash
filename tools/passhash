@@ -1,0 +1,28 @@
+#!/usr/bin/nodejs
+
+// import b64_hmac_sha{512,1} global to avoid having to import it in 
+//  passhash-common.js
+b64_hmac_sha512 = require('../content/passhash-sha512.js').b64_hmac_sha512;
+b64_hmac_sha1 = require('../content/passhash-sha1.js').b64_hmac_sha1;
+
+b64_crypt_sha512 = require('../content/passhash-sha512.js').b64_crypt_sha512;
+
+// normal import
+var passhash = require('../content/passhash-common.js');
+
+var site = process.argv[2] || "example-site";
+var master = process.argv[3] || "example-master-pass";
+var sha_algorithm = process.argv[4] || "sha512crypt";
+console.log("using site='%s' master='%s' algorithm='%s'\n", 
+            site, master, sha_algorithm);
+var pw = passhash.PassHashCommon.generateHashWord(
+        site,
+        master,
+        14,
+        true,
+        true,
+        true,
+        false,
+        false,
+        sha_algorithm);
+console.log(pw);
